@@ -7,7 +7,7 @@
 6) le lien vers l'oublie de mdp ne fonctionne pas
 7) Profile ne doit pas avoir de e = Profil
 8) L'erreur n'est pas clair quand je créer un profil avec la même adresse mail
-9) Footer mal écris
+9) Footer mal écris -> tous droits réservé
 10) si on met des lettres dans le npa l'application crash
 11) on même pas mis l'adresse mail qu'il y a déja une erreur
 12) on peut créer des todo dans le passé
