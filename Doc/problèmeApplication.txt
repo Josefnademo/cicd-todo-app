@@ -9,8 +9,9 @@
 8) L'erreur n'est pas clair quand je créer un profil avec la même adresse mail
 9) Footer mal écris -> tous droits réservé
 10) si on met des lettres dans le npa l'application crash
-11) on même pas mis l'adresse mail qu'il y a déja une erreur
+11) on a même pas mis l'adresse mail qu'il y a déja une erreur
 12) on peut créer des todo dans le passé
 13) la description ne s'enlève pas quand on créé des tâches
 14) description => mix de gras,italique, souligné, barré => ne peut pas être cherché
 15) changement de nom => quand on met un nom trop long, ça crash
+16) Todo termminé ce mettent pas tout en bas
