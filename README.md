@@ -83,3 +83,15 @@ Fonctionnalités testées :
 * Workflow auto-assignation des issues
 * Publication des coverage via Codecov
 * Badges ajoutés au README
+
+## Documentation
+Toute la documentation du projet est centralisée dans un rapport PDF complet  :
+Le rapport PDF complet sera disponible ici une fois finalisé : [Lien vers le rapport](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/cicd-todo-app_Rapport.docx)
+
+Des documents séparés existent pour certains chapitres spécifiques :
+**PlanTest.docx** – Plan de test détaillé
+**Strategie Test.docx** – Stratégie de test complète
+
+Chaque membre de l’équipe dispose également de son propre journal de travail :
+- Journal-de-Travail_NademoYosef.xlsx
+- Journal-de-Travail_BamertMathieu.xlsx
