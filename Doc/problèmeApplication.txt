@@ -1,17 +1,18 @@
-
-1) barre de recherche => si une tache fait deux lettre on peut pas la rechercher
-2) barre de recherche => si une tache est trop longue, elle s affiche pas
-3) description => description trop longue déborde
-4) description => si description est beaucoup trop longue => crash car limite dépassée
-5) barre de recherche + description => quand on créé une tâche pendant une recherche on la voit de toute manière dans la liste des taches recherchées 
-6) le lien vers l'oublie de mdp ne fonctionne pas
-7) Profile ne doit pas avoir de e = Profil
-8) L'erreur n'est pas clair quand je créer un profil avec la même adresse mail
-9) Footer mal écris -> tous droits réservé
-10) si on met des lettres dans le npa l'application crash
-11) on a même pas mis l'adresse mail qu'il y a déja une erreur
-12) on peut créer des todo dans le passé
-13) la description ne s'enlève pas quand on créé des tâches
-14) description => mix de gras,italique, souligné, barré => ne peut pas être cherché
-15) changement de nom => quand on met un nom trop long, ça crash
-16) Todo termminé ce mettent pas tout en bas
+| ID   | Bug                                                                          | Gravité  | Priorité |
+| ---- | ---------------------------------------------------------------------------- | -------- | -------- |
+| B001 | Recherche impossible si le texte fait 2 lettres                              | Majeur   | Haut     |
+| B002 | Tâche trop longue → ne s’affiche pas                                         | Critique | Haut     |
+| B003 | Description trop longue déborde en UI                                        | Majeur   | Moyen    |
+| B004 | Description extrêmement longue → crash DB                                    | Critique | Haut     |
+| B005 | Création d’une tâche pendant une recherche = affichée dans résultats filtrés | Mineur   | Bas      |
+| B006 | Lien "mot de passe oublié" ne fonctionne pas                                 | Majeur   | Moyen    |
+| B007 | Texte "Profile" → doit être "Profil"                                         | Mineur   | Bas      |
+| B008 | Message d'erreur email déjà utilisé non clair                                | Majeur   | Moyen    |
+| B009 | Footer → "tous droits réservé" incorrect                                     | Mineur   | Bas      |
+| B010 | NPA (zip) avec lettres → crash                                               | Critique | Haut     |
+| B011 | Erreur affichée même sans écrire un email                                    | Majeur   | Moyen    |
+| B012 | On peut créer un todo dans le passé                                          | Mineur   | Moyen    |
+| B013 | La description ne se vide pas après création                                 | Mineur   | Bas      |
+| B014 | Texte formaté (gras/italique/souligné/barré) non trouvable en recherche      | Mineur   | Bas      |
+| B015 | Changement de nom trop long → crash                                          | Critique | Haut     |
+| B016 | Les todos terminés ne s’affichent pas en bas                                 | Majeur   | Moyen    |
