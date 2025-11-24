@@ -89,9 +89,9 @@ Toute la documentation du projet est centralisée dans un rapport PDF complet  :
 Le rapport PDF complet sera disponible ici une fois finalisé : [Lien vers le rapport](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/cicd-todo-app_Rapport.docx)
 
 Des documents séparés existent pour certains chapitres spécifiques :
-**PlanTest.docx** – Plan de test détaillé
-**Strategie Test.docx** – Stratégie de test complète
+- **PlanTest.docx** – Plan de tests détaillé [Lien vers le PlanTest](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/PlanTest.docx)
+- **StrategieTest.docx** – Stratégie de tests complète [Lien vers la Strategie de tests](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/Strategie%20Test.docx)
 
 Chaque membre de l’équipe dispose également de son propre journal de travail :
-- Journal-de-Travail_NademoYosef.xlsx
-- Journal-de-Travail_BamertMathieu.xlsx
+- [Journal-de-Travail_NademoYosef.xlsx](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/Journal-de-Travail_NademoYosef.xlsx)
+- [Journal-de-Travail_BamertMathieu.xlsx](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/Journal-de-Travail_BamertMathieu.xlsx)
