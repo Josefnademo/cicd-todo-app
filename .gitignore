@@ -3,15 +3,6 @@ todo-app-mysql-1.0.6/frontend/package-lock.json
 
 # Word / Office
 ~$*
-*.docx
-*.doc
-*.dotx
-*.dotm
-*.pptx
-*.ppt
-*.xlsx
-*.xls
-*.xlsm
 
 # Node modules
 node_modules/
