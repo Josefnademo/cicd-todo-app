@@ -93,6 +93,9 @@ Des documents séparés existent pour certains chapitres spécifiques :
 - **StrategieTest.docx** – Stratégie de tests complète [Lien vers la Strategie de tests](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/Strategie%20Test.docx)
 
 Chaque membre de l’équipe dispose également de son propre journal de travail pour la partie de Tests et CI-CD :
-- [Test-Journal-de-Travail_NademoYosef.xlsx](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/TEST-Journal-de-Travail_NademoYosef.xlsx)
-- [CI-CD-Journal-de-Travail_NademoYosef.xlsx](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/CI-CD-Journal-de-Travail_NademoYosef.xlsx)
-- [Journal-de-Travail_BamertMathieu.xlsx](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/Journal-de-Travail_BamertMathieu.xlsx)
+- Test:
+    - [Test-Journal-de-Travail_NademoYosef.xlsx](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/TEST-Journal-de-Travail_NademoYosef.xlsx)
+      
+- CI-CD:
+    - [CI-CD-Journal-de-Travail_NademoYosef.xlsx](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/CI-CD-Journal-de-Travail_NademoYosef.xlsx)
+    - [Journal-de-Travail_BamertMathieu.xlsx](https://github.com/Josefnademo/cicd-todo-app/blob/main/Doc/Journal-de-Travail_BamertMathieu.xlsx)
