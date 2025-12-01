@@ -1,0 +1,80 @@
+name: CI – Backend & Frontend
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  backend:
+    name: Backend – Node.js
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./backend
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=moderate
+        working-directory: ./backend
+
+      - name: Lint code
+        run: npm run lint
+        working-directory: ./backend
+
+      - name: Run unit tests
+        run: npm test
+        working-directory: ./backend
+
+      - name: Upload coverage (optional)
+        if: success()
+        uses: codecov/codecov-action@v3
+        with:
+          directory: ./backend/coverage
+
+  frontend:
+    name: Frontend – Vue.js
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=moderate
+        working-directory: ./frontend
+
+      - name: Lint code
+        run: npm run lint
+        working-directory: ./frontend
+
+      - name: Run Cypress E2E tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm run serve
+          wait-on: http://localhost:8080
+          wait-on-timeout: 60
+        working-directory: ./frontend
+
+      - name: Build Vue app
+        run: npm run build
+        working-directory: ./frontend
