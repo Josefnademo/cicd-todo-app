@@ -23,12 +23,32 @@ REDIS_URL="redis://:admin@localhost:6379"
 "@ | Out-File -FilePath ".\.env" -Encoding utf8
     }
 
+    # ================================
+    # 2️⃣ Start backend
+    # ================================
     Write-Host "`n=== STARTING BACKEND ===" -ForegroundColor Cyan
     # Open backend in a new PowerShell window, keep it alive
     Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd `"$rootDir\backend`"; npm start"
+	
+	    # Optional: wait a few seconds for backend to be ready
+    Write-Host "Waiting 5 seconds for backend to initialize..." -ForegroundColor Yellow
+    Start-Sleep -Seconds 5
 
     # ================================
-    # 2️⃣ Frontend setup
+    # 3️⃣ Seed database
+    # ================================
+	Write-Host "`n=== WAITING FOR BACKEND TO BE READY ===" -ForegroundColor Yellow
+	while (-not (Test-NetConnection -ComputerName localhost -Port 3000).TcpTestSucceeded) {
+		Write-Host "Waiting for backend to be ready..."
+		Start-Sleep -Seconds 2
+	}
+	
+	Set-Location -Path "$rootDir\backend\seeders"
+    node seed.js
+    Write-Host "✅ Database seeded successfully!" -ForegroundColor Green
+
+    # ================================
+    # 4️⃣ Frontend setup
     # ================================
     Write-Host "`n=== INSTALLING FRONTEND DEPENDENCIES ===" -ForegroundColor Cyan
     Set-Location -Path "$rootDir\frontend"
@@ -39,7 +59,7 @@ REDIS_URL="redis://:admin@localhost:6379"
     Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd `"$rootDir\frontend`"; npm run dev"
 
     # ================================
-    # 3️⃣ Summary
+    # 5️⃣ Summary
     # ================================
     Write-Host "`n✅ APPLICATION LAUNCHED SUCCESSFULLY!" -ForegroundColor Green
     Write-Host "Backend: http://localhost:3000" -ForegroundColor Yellow
