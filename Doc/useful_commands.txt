@@ -1,0 +1,27 @@
+
+///////DB///////
+mysql -u root -padmin
+
+///////Sedder///////
+node seed.js
+
+///////Cypress///////
+cd frontend
+npm install cypress --save-dev
+npx cypress open
+
+//Run test In CLI:
+npx cypress run --browser chrome
+npx cypress run --browser edge
+npx cypress run --browser firefox
+
+//Generate frontend code coverage    
+npm install @cypress/code-coverage --save-dev
+//or 
+npm install --save-dev @cypress/code-coverage istanbul-lib-coverage
+
+//@cypress/code-coverage → integrates coverage into Cypress
+//istanbul-lib-coverage → generates the report
+
+//Generate backend coverage
+npm run test:ci
