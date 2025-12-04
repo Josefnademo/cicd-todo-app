@@ -1,62 +1,57 @@
-﻿# Installation et exécution du backend et du frontend
+﻿# =========================================
+# START TODO APP (Backend + Frontend)
+# =========================================
 
 try {
-    # Backend 
-    Write-Host "`n=== INSTALLATION DES DÉPENDANCES BACKEND ===" -ForegroundColor Cyan
-    
-    Set-Location -Path .\backend
+    # Save current directory
+    $rootDir = Get-Location
+
+    # ================================
+    # 1️⃣ Backend setup
+    # ================================
+    Write-Host "`n=== INSTALLING BACKEND DEPENDENCIES ===" -ForegroundColor Cyan
+    Set-Location -Path "$rootDir\backend"
     npm install
-    
-    if (-not (Test-Path .\.env)) {
-        Write-Host "Je crée un fichier .env pour le backend" -ForegroundColor Yellow
+
+    # Create .env if missing
+    if (-not (Test-Path ".\.env")) {
+        Write-Host "Creating .env for backend..." -ForegroundColor Yellow
         @"
 DB_URL="mysql://app_user:app_password@localhost:3306/db_todoapp"
 MONGO_URI="mongodb://root:admin@localhost:27017"
 REDIS_URL="redis://:admin@localhost:6379"
-"@  | Out-File -FilePath .\.env -Encoding utf8
+"@ | Out-File -FilePath ".\.env" -Encoding utf8
     }
-    
-    Write-Host "`n=== DÉMARRAGE DU SERVEUR BACKEND ===" -ForegroundColor Cyan
-    $backendJob = Start-Job -ScriptBlock {
-        Set-Location -Path $using:PWD #$using transmet cette valeur à l'intérieur du Job      #Dossier actuel (PWD = Print Working Directory)
-        npm run start:env
-    }
-    
-    Set-Location -Path ..
 
-    # Frontend 
-    Write-Host "`n=== INSTALLATION DES DÉPENDANCES FRONTEND ===" -ForegroundColor Cyan
-    
-    Set-Location -Path .\frontend
+    Write-Host "`n=== STARTING BACKEND ===" -ForegroundColor Cyan
+    # Open backend in a new PowerShell window, keep it alive
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd `"$rootDir\backend`"; npm start"
+
+    # ================================
+    # 2️⃣ Frontend setup
+    # ================================
+    Write-Host "`n=== INSTALLING FRONTEND DEPENDENCIES ===" -ForegroundColor Cyan
+    Set-Location -Path "$rootDir\frontend"
     npm install
-    
-    Write-Host "`n=== DÉMARRAGE DU SERVEUR FRONTEND ===" -ForegroundColor Cyan
-    $frontendJob = Start-Job -ScriptBlock {
-        Set-Location -Path $using:PWD #$using transmet cette valeur à l'intérieur du Job      #Dossier actuel (PWD = Print Working Directory)
-        npm run dev
-    }
-    
-    Set-Location -Path ..
 
-    Write-Host "`n=== L'APPLICATION A ÉTÉ LANCÉE AVEC SUCCÈS ! ===" -ForegroundColor Green
+    Write-Host "`n=== STARTING FRONTEND ===" -ForegroundColor Cyan
+    # Open frontend in a new PowerShell window
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd `"$rootDir\frontend`"; npm run dev"
+
+    # ================================
+    # 3️⃣ Summary
+    # ================================
+    Write-Host "`n✅ APPLICATION LAUNCHED SUCCESSFULLY!" -ForegroundColor Green
     Write-Host "Backend: http://localhost:3000" -ForegroundColor Yellow
     Write-Host "Frontend: http://localhost:5173" -ForegroundColor Yellow
-    
-    # Attendez la fin (ou Ctrl+C pour arrêter)
-    Write-Host "`nAppuyez sur Ctrl+C pour arrêter les serveurs" -ForegroundColor DarkYellow
-    try {
-        while ($true) {
-            Start-Sleep -Seconds 1
-        }
-    }
-    finally {
-        Stop-Job $backendJob
-        Stop-Job $frontendJob
-        Remove-Job $backendJob
-        Remove-Job $frontendJob
-    }
+
+    Write-Host "`nPress Ctrl+C in the windows to stop servers." -ForegroundColor DarkYellow
 }
 catch {
-    Write-Host "`nERREUR: $_" -ForegroundColor Red
+    Write-Host "`n❌ ERROR: $_" -ForegroundColor Red
     exit 1
+}
+finally {
+    # Go back to root
+    Set-Location -Path $rootDir
 }
