@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: todo-prod
+    environment:
+      NODE_ENV: production
+      DB_URL: ${DB_URL}
+      MONGO_URI: ${MONGO_URI}
+      REDIS_URL: ${REDIS_URL}
+    ports:
+      - "3000:3000"
+    restart: always

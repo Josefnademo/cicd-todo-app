@@ -1,0 +1,14 @@
+# Update
+sudo apt update && sudo apt upgrade -y
+
+# Download Docker
+sudo apt update
+sudo apt install docker.io docker-compose -y
+sudo usermod -aG docker admin
+
+# Download Node.js
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# Download pm2
+sudo npm install -g pm2

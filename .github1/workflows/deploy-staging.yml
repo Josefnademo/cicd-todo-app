@@ -1,0 +1,33 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.STAGING_SSH_KEY }}
+
+      - name: Upload project to server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.STAGING_USER }}@${{ secrets.STAGING_HOST }} "rm -rf ~/todo && mkdir ~/todo"
+          scp -o StrictHostKeyChecking=no -r ./* ${{ secrets.STAGING_USER }}@${{ secrets.STAGING_HOST }}:~/todo
+
+      - name: Deploy with Docker Compose
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.STAGING_USER }}@${{ secrets.STAGING_HOST }} "
+            cd ~/todo &&
+            echo 'DB_URL=${{ secrets.STAGING_DB_URL }}' > .env &&
+            echo 'MONGO_URI=${{ secrets.STAGING_MONGO_URI }}' >> .env &&
+            echo 'REDIS_URL=${{ secrets.STAGING_REDIS_URL }}' >> .env &&
+            docker compose -f docker-compose.yml -f docker-compose.staging.yml down &&
+            docker compose -f docker-compose.yml -f docker-compose.staging.yml up -d --build
+          "

@@ -2,79 +2,73 @@ name: CI – Backend & Frontend
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
   pull_request:
 
 jobs:
   backend:
-    name: Backend – Node.js
+    name: Backend Audit / Lint / Test
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
+          cache-dependency-path: ./todo-app-mysql-1.0.6/backend/package-lock.json
 
-      - name: Install dependencies
+      - name: Install backend dependencies
+        working-directory: ./todo-app-mysql-1.0.6/backend
         run: npm install
-        working-directory: ./backend
 
-      - name: Audit dependencies
+      - name: Backend audit
+        working-directory: ./todo-app-mysql-1.0.6/backend
         run: npm audit --audit-level=moderate
-        working-directory: ./backend
 
-      - name: Lint code
+      - name: Backend lint
+        working-directory: ./todo-app-mysql-1.0.6/backend
         run: npm run lint
-        working-directory: ./backend
 
-      - name: Run unit tests
+      - name: Backend tests (Jest + Supertest)
+        working-directory: ./todo-app-mysql-1.0.6/backend
         run: npm test
-        working-directory: ./backend
-
-      - name: Upload coverage (optional)
-        if: success()
-        uses: codecov/codecov-action@v3
-        with:
-          directory: ./backend/coverage
 
   frontend:
-    name: Frontend – Vue.js
+    name: Frontend Audit / Lint / Cypress Tests
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
+          cache-dependency-path: ./todo-app-mysql-1.0.6/frontend/package-lock.json
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
+        working-directory: ./todo-app-mysql-1.0.6/frontend
         run: npm install
-        working-directory: ./frontend
 
-      - name: Audit dependencies
+      - name: Frontend audit
+        working-directory: ./todo-app-mysql-1.0.6/frontend
         run: npm audit --audit-level=moderate
-        working-directory: ./frontend
 
-      - name: Lint code
+      - name: Frontend lint
+        working-directory: ./todo-app-mysql-1.0.6/frontend
         run: npm run lint
-        working-directory: ./frontend
 
-      - name: Run Cypress E2E tests
-        uses: cypress-io/github-action@v5
+      - name: Cache Cypress
+        uses: actions/cache@v4
         with:
-          start: npm run serve
-          wait-on: http://localhost:8080
-          wait-on-timeout: 60
-        working-directory: ./frontend
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('frontend/package-lock.json') }}
 
-      - name: Build Vue app
-        run: npm run build
-        working-directory: ./frontend
+      - name: Cypress Tests (Chrome, Firefox, Edge)
+        working-directory: ./todo-app-mysql-1.0.6/frontend
+        run: |
+          npx cypress run --browser chrome
+          npx cypress run --browser firefox
+          npx cypress run --browser edge
